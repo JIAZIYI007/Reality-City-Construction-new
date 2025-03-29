@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "tcwm",
+  "version": "${version}",
+  "name": "Reality City Construction",
+  "description": "A city and road mod",
+  "authors": [
+    "MSnj_studios",
+    "Yaoxiansen"
+  ],
+  "contact": {
+    "website": "https://www.realitycityconstruction.cn"
+  },
+  "license": "MIT",
+  "icon": "assets/tcwm/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "msnj.tcwm.fabric.RealityCityConstructionFabric"
+    ],
+    "client": [
+      "msnj.tcwm.fabric.ClientInitFabric"
+    ],
+    "modmenu": [
+      "msnj.tcwm.fabric.ModMenuSettingsExecutes"
+    ]
+  },
+  "mixins": [
+    "tcwm-mixins.json"
+  ],
+  "depends": {
+    "fabricloader": "*",
+    "minecraft": "*"
+  }
+}

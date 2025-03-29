@@ -1,0 +1,8 @@
+{
+  "pack": {
+    "description": "视听觉附加内容（将此资源包排序到最底以关闭）",
+    "pack_format": 6,
+    "forge:resource_pack_format": 6,
+    "forge:data_pack_format": 6
+  }
+}

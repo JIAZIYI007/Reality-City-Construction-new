@@ -1,0 +1,58 @@
+{
+	"gz_metro_beep": {
+		"sounds": [
+			{
+			    "name": "mtr:gz_metro_beep",
+			    "pitch": 1
+		    }
+	    ]
+	},
+               "gz_metro_beep1": {
+		"sounds": [
+			{
+			    "name": "mtr:gz_metro_beep1",
+			    "pitch": 1
+		    }
+	    ]
+	},
+	"gz_metro_line1_classic": {
+		"sounds": [
+			{
+			    "name": "mtr:gz_metro_line1_classic",
+			    "pitch": 1
+		    }
+	    ]
+	},
+	"gz_metro_apm_platform": {
+		"sounds": [
+			{
+			    "name": "mtr:gz_metro_apm_platform",
+			    "pitch": 1
+		    }
+	    ]
+	},
+	"beijing_mtr": {
+		"sounds": [
+			{
+			    "name": "mtr:beijing_mtr",
+			    "pitch": 1
+		    }
+	    ]
+	},
+	"beijing_mtr1": {
+		"sounds": [
+			{
+			    "name": "mtr:beijing_mtr1",
+			    "pitch": 1
+		    }
+	    ]
+	},
+	"amtr": {
+		"sounds": [
+			{
+			    "name": "mtr:amtr_sound",
+			    "pitch": 1
+		    }
+	    ]
+	}
+}

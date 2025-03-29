@@ -1,0 +1,14 @@
+{
+    "required": true,
+    "package": "msnj.tcwm.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "minVersion": "0.8",
+    "client": [
+        "MixinTitleScreenAtModVersion",
+        "MixinDataFix"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    },
+    "refmap": "tcwm-common-refmap.json"
+}
