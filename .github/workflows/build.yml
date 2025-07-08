@@ -1,36 +1,40 @@
-# Automatically build the project and run any configured tests for every push
-# and submitted pull request. This can help catch issues that only occur on
-# certain platforms or Java versions, and provides a first line of defence
-# against bad commits.
-
 name: Build
-on: [ pull_request, push,workflow_dispatch]
+on: [pull_request, push, workflow_dispatch]
 
 jobs:
   build:
     strategy:
       matrix:
-        minecraft: [ 1.16.5, 1.17.1, 1.18.2, 1.19.2, 1.19.3 ]
-        loader: [ fabric, forge ]
+        minecraft: [1.16.5, 1.17.1, 1.18.2, 1.19.2, 1.19.3]
+        loader: [fabric, forge]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        
       - name: Validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
+        
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: 17
+      
       - name: Make gradle wrapper executable
         run: chmod +x ./gradlew
+        
       - name: Setup ${{ matrix.minecraft }} ${{ matrix.loader }}
         run: ./gradlew setupLibrary -PbuildVersion="${{ matrix.minecraft }}"
+        
       - name: Build ${{ matrix.minecraft }} ${{ matrix.loader }}
         run: ./gradlew ${{ matrix.loader }}:build -PbuildVersion="${{ matrix.minecraft }}"
+        
+      # 关键修改：升级到 v4 并添加压缩选项
       - name: Capture release artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # 从 v3 升级到 v4
         with:
-          name: Fabric and Forge Artifacts
+          name: Fabric-and-Forge-Artifacts-${{ matrix.minecraft }}-${{ matrix.loader }}
           path: build/
+          compression-level: 0  # 禁用压缩以加快上传速度
+          if-no-files-found: error  # 明确要求文件必须存在
