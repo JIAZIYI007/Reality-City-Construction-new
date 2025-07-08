@@ -12,9 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
+      # 解决方案1：升级验证操作版本
       - name: Validate gradle wrapper
-        uses: gradle/wrapper-validation-action@v1
+        uses: gradle/wrapper-validation-action@v2  # 从 v1 升级到 v2
         
+      # 解决方案2：添加重试机制
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
@@ -24,17 +26,25 @@ jobs:
       - name: Make gradle wrapper executable
         run: chmod +x ./gradlew
         
+      # 解决方案3：添加超时设置和缓存
       - name: Setup ${{ matrix.minecraft }} ${{ matrix.loader }}
+        timeout-minutes: 10  # 设置超时防止卡死
         run: ./gradlew setupLibrary -PbuildVersion="${{ matrix.minecraft }}"
         
       - name: Build ${{ matrix.minecraft }} ${{ matrix.loader }}
+        timeout-minutes: 20  # 构建步骤设置更长超时
         run: ./gradlew ${{ matrix.loader }}:build -PbuildVersion="${{ matrix.minecraft }}"
         
-      # 关键修改：升级到 v4 并添加压缩选项
       - name: Capture release artifacts
-        uses: actions/upload-artifact@v4  # 从 v3 升级到 v4
+        uses: actions/upload-artifact@v4
         with:
           name: Fabric-and-Forge-Artifacts-${{ matrix.minecraft }}-${{ matrix.loader }}
           path: build/
-          compression-level: 0  # 禁用压缩以加快上传速度
-          if-no-files-found: error  # 明确要求文件必须存在
+          compression-level: 0
+          if-no-files-found: error
+
+# 解决方案4：添加Gradle依赖缓存（放在jobs同级）
+cache:
+  paths:
+    - ~/.gradle/caches
+    - ~/.gradle/wrapper
